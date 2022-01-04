@@ -1,0 +1,52 @@
+
+
+export class main {
+
+    public main() {
+        let animalArray:Array<any> = new Array<any>(3);
+        animalArray[0] = new dog();
+        animalArray[1] = new cat();
+        animalArray[2] = new dog();
+
+        for (let i = 0; i < animalArray.length; i++) {
+            animalArray[i].bark();
+        }
+    }
+}
+
+
+export class Animal {
+
+    constructor(animalName:string) {
+        this.hungry(animalName);
+    }
+
+    public animalBark(bark:string) {
+        console.log(bark);
+    }
+
+    private hungry(animalName:string) {
+        console.log(animalName + " is hungry");
+    }
+
+}
+
+
+export class dog extends Animal {
+    constructor() {
+        super("dog");
+    }
+    public bark() {
+        this.animalBark("ワンワン");
+    }
+}
+
+
+export class cat extends Animal {
+    constructor() {
+        super("cat");
+    }
+    public bark() {
+        this.animalBark("にゃー");
+    }
+}

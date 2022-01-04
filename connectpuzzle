@@ -1,0 +1,46 @@
+
+// ３方向判定メソッド
+private judgeColor() {
+    for (let i = 0; i < 6; i++) {
+        for (let j = 0; j < 6; j++) {
+
+            /* iが0以外 */
+            if (i && this.array[i][j].frame === this.array[i - 1][j].frame) {
+                this.searchPieces(this.array[i][j], this.array[i - 1][j]);
+            }
+            /* jが5未満 */
+            else if (j < 5 && this.array[i][j].frame === this.array[i][j + 1].frame) {
+                this.searchPieces(this.array[i][j], this.array[i][j + 1]);
+            }
+
+            // この下はいらないです if文に引っかからなかったら次のfor文回るから
+            /* i=0, j=5 */
+            // else {
+            //     return;
+            // }
+
+            console.log(`${this.judgeArray} ; this.judgeArray`);
+        }
+    }
+}
+
+// 探すメソッド
+private searchPieces(pieceInfo: setPieceInfo, pieceInfo2: setPieceInfo) {
+    for (let i = 0; i < this.judgeArray.length; i++) {
+        let match = this.judgeArray[i].find(() => {
+            return pieceInfo.frame // ここはフレーム番号でなかったら違うのに書き換えて
+        });
+        if (match) {
+
+            this.judgeArray[this.judgeArray.length - 1].push(pieceInfo2)
+        } else {
+            // ここで内側の配列を作成  [{piece}]の形を形成
+            let judgeArr :any = [];
+            judgeArr.push(pieceInfo);
+            this.judgeArray[this.judgeArray.length - 1].push(judgeArr);
+        }
+    }
+}
+
+
+// this.judgeArray = [[{piece},{piece},{piece},{piece}],[{piece},{piece}],[{piece},{piece}],[{piece}]] 最終的にこれになりたい
